@@ -1,0 +1,32 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  reformat:
+    desc: Run black formatter for whole project
+    cmds:
+      - black .
+
+  tests:
+    desc: Run pytest test
+    cmds:
+      - pytest -vvv
+
+  tdd:
+    desc: Run unit tests in tdd format
+    cmds:
+      - pytest -vvv -x --ff -r A
+
+  tdd:match:
+    desc: Run unit tests in tdd format matching name for test
+    cmds:
+      - pytest -vv -x -r A -k {{.CLI_ARGS}}
